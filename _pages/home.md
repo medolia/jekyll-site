@@ -25,7 +25,7 @@ feature_row:
     url: "https://www.pixiv.net/"
     btn_class: "btn--primary"
     btn_label: "康一康"
-  - image_path: https://medolia.github.io/assets/img/pixiv4.jpg
+  - image_path: https://medolia.github.io/assets/img/pixiv4.png
     alt: "推荐画师"
     title: "本周推荐画师: Neli"
     excerpt: "只要前方还有路，奥尔加就不会停止前进，希望之花连接着羁绊！"
