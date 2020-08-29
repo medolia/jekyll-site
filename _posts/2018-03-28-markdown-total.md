@@ -4,7 +4,6 @@ categories: 编程
 tags: markdown
 excerpt: 完整版markdown语法
 ---
-# Markdown 完整语法说明 <span id="home">
 
 ---
 
@@ -12,7 +11,7 @@ excerpt: 完整版markdown语法
 
 ---
 
-# 目录
+# 目录 <span id="home">
 
 * **[概述 ](#1)**
 	* **[宗旨 ](#1.1)**
