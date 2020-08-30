@@ -86,7 +86,7 @@ public class MainController {
 首先做一个运行 app 后第一个看到的页面，即主页。
 
 ```java
-@GetMapping("/")
+    @GetMapping("/")
     public String showIndex() {
         return "index";
     }
