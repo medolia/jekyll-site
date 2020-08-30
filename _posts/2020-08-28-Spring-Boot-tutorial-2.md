@@ -1,13 +1,13 @@
 ---
-
-Title: Spring Boot 入门系列教程（二）
+title: Spring Boot 入门系列教程（二）
 categories: 编程
-tags:
-	- Spring Boot
-	- Spring MVC
-	- Spring JPA
-	- thymeleaf
-	- MYSQL
+tags: 
+  - Spring
+  - Spring Boot
+  - Spring JPA
+  - Spring MVC
+  - thymeleaf
+  - jQuery
 excerpt: 从零开始搭建一个 Spring Boot 项目的教程（二）
 ---
 
@@ -21,7 +21,7 @@ excerpt: 从零开始搭建一个 Spring Boot 项目的教程（二）
 
 首先是确定问卷主题并插入数据，这里假设是评价某个游戏，从四个方面评价，每个游戏特性分别对应若干单选项。
 
-```mysql
+```sql
 --
 -- 转存表中的数据 `question_info`
 --
@@ -79,7 +79,7 @@ public class MainController {
 }
 ```
 
-**@Controller **与**@RequestMapping** 两个类注解告诉 Spring Boot 这个类是一个会识别各种链接的控制器。首先注入三个主要 repository 用于数据库交互，**@Autowired** 可以注解一个方法或者构造器，表明 Spring app 运行时会识别此注解并将被注解的方法或构造器加入到 Spring Bean 当中。
+**@Controller**与 **@RequestMapping** 两个类注解告诉 Spring Boot 这个类是一个会识别各种链接的控制器。首先注入三个主要 repository 用于数据库交互，**@Autowired** 可以注解一个方法或者构造器，表明 Spring app 运行时会识别此注解并将被注解的方法或构造器加入到 Spring Bean 当中。
 
 ## 主页设计
 
@@ -146,7 +146,7 @@ public class MainController {
 主页的 html 表明点击 **Customize My Options** 按钮会跳转到 “/vote” 链接，回到 MainController 控制器，对应响应方法如下：
 
 ```java
-		// 投票主页响应，返回一个答案-选项集的映射
+    // 投票主页响应，返回一个答案-选项集的映射
     @GetMapping("/vote")
     public String showVoteForm(Model model) {
         List<Question> questionList = new ArrayList<>();
@@ -163,7 +163,7 @@ public class MainController {
         return "vote";
     }
 
-		private List<Option> filterByQuestionId(List<Option> options, int Qid) {
+    private List<Option> filterByQuestionId(List<Option> options, int Qid) {
         return options.stream().filter(x -> x.getQuestion_id() == Qid).collect(Collectors.toList());
     }
 ```
@@ -204,7 +204,7 @@ public class MainController {
 
 开头部分与 index 相同，不作多余展示，这里要着重说明 thymeleaf 的模板渲染原理。
 
-来看表单部分，**th:text** 定义替代目标元素文本的值，div 中的 **th:each** 表示对于 optionsMap 中的每一组键值对均会生成一个 div 元素，thymeleaf 遍历映射时可以很方便的通过分别访问键值对对象的 **key** 和 **value** 属性得到键与值，于是我们对每个键的值（也就是 List<Option>）再使用一次 **th:each** 迭代显示出选项，选项设置为单选，id 与 name 设置为问题编号+选项编号，value 设置为选项编号+选项内容。
+来看表单部分，**th:text** 定义替代目标元素文本的值，div 中的 **th:each** 表示对于 optionsMap 中的每一组键值对均会生成一个 div 元素，thymeleaf 遍历映射时可以很方便的通过分别访问键值对对象的 **key** 和 **value** 属性得到键与值，于是我们对每个键的值（也就是 List\<Option>）再使用一次 **th:each** 迭代显示出选项，选项设置为单选，id 与 name 设置为问题编号+选项编号，value 设置为选项编号+选项内容。
 
 thymeleaf 会如我们所愿渲染出这样的页面：
 
@@ -215,7 +215,7 @@ thymeleaf 会如我们所愿渲染出这样的页面：
 投票页面表明表单将有捕获 “/votepost” 的控制器处理，对应方法如下：
 
 ```java
-		// 投票判定响应
+    // 投票判定响应
     @PostMapping("/votepost")
     public String processVote(HttpServletRequest request) {
         List<Answer> answerList = new ArrayList<>();
@@ -248,7 +248,7 @@ thymeleaf 会如我们所愿渲染出这样的页面：
 
 ![截屏2020-08-28 14.52.04](https://tva1.sinaimg.cn/large/007S8ZIlgy1gi7stfn202j30he08k0to.jpg)
 
-_csrf 是 Spring Security 为防止跨域请求使用的 token ，而其他变量就是已选中的 input 中的 name 和 value 属性，这些数据将存入 request 中。使用 **getParameterNames()** 可以得到一个枚举变量，**getParameter()**可以得到对应变量的值，这里使用了正则表达式过滤出有效的答案变量，然后 JPA 接口定义的 **saveAll()** 方法可以接受一个列表一次性存入列表中的所有对象，此外，request 的 **getLocalAddr()** 方法可以得到用户当前的 ip 地址。
+_csrf 是 Spring Security 为防范 CSRF 攻击使用的 token ，而其他变量就是已选中的 input 中的 name 和 value 属性，这些数据将存入 request 中。使用 **getParameterNames()** 可以得到一个枚举变量，**getParameter()** 可以得到对应变量的值，这里使用了正则表达式过滤出有效的答案变量，然后 JPA 接口定义的 **saveAll()** 方法可以接受一个列表一次性存入列表中的所有对象，此外，request 的 **getLocalAddr()** 方法可以得到用户当前的 ip 地址。
 
 ## 展示投票结果
 
@@ -287,7 +287,7 @@ _csrf 是 Spring Security 为防止跨域请求使用的 token ，而其他变�
 然后在方法中使用变量注解 **@ModelAttribute** 即可：
 
 ```java
-		// 问卷结果页面
+    // 问卷结果页面
     @GetMapping("/result")
     public String showVoteDiagram(@ModelAttribute("optionsMap") Map<Question, List<Option>> optionsMap) {
 
@@ -298,7 +298,7 @@ _csrf 是 Spring Security 为防止跨域请求使用的 token ，而其他变�
 此外，使用 jQuery 的 Ajax 请求返回 json 化的所有 answer_info 表中的数据来渲染前端页面，需要 **@GetMapping** 和 **@ResponseBody** 注解配合使用，对应控制器方法为：
 
 ```java
-		@CrossOrigin // 允许跨域请求(OCR)
+    @CrossOrigin // 允许跨域请求(OCR)
     @GetMapping(path = "/results", produces = "application/json")
     @ResponseBody // 请求结果查找得到 Json 文件
     public Iterable<Answer> getResJson() {
@@ -369,7 +369,7 @@ _csrf 是 Spring Security 为防止跨域请求使用的 token ，而其他变�
 </script>
 ```
 
-值得一提的是此页面使用 thymeleaf 的 **th:colspan** 来动态定义表头宽，使用 jQuery 读取 json 中的每一条记录并操作页面元素，最终得到这样的结果图：
+值得一提的是此页面使用 thymeleaf 的 **th:colspan** 来动态定义表头跨距，使用 jQuery 读取 json 中的每一条记录并操作页面元素，最终得到这样的结果图：
 
 ![截屏2020-08-28 15.35.17](https://tva1.sinaimg.cn/large/007S8ZIlgy1gi7stkj4qlj31570u0gq4.jpg)
 

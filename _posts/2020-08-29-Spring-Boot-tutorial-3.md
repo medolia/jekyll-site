@@ -1,13 +1,12 @@
 ---
-Title: Spring Boot 入门系列教程（三）
+title: Spring Boot 入门系列教程（三）
 categories: 编程
-tags:
-	- Spring Boot
-	- Spring Security
-	- Spring MVC
-	- Spring JPA
-	- thymeleaf
-	- MYSQL
+tags: 
+  - Spring
+  - Spring Boot
+  - Spring Security
+  - Spring JPA
+  - thymeleaf
 excerpt: 从零开始搭建一个 Spring Boot 项目的教程（三）
 ---
 
@@ -126,7 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 接着是配置一个密码转码器，这里使用的是 **Pbkdf2**，使数据库存储加密后的密码，而用户登录时 Spring 会自动使用解码器解码输入的密码与数据库核对。
 
 ```java
-		@Bean // 标记为 Spring Bean
+    @Bean // 标记为 Spring Bean
     public PasswordEncoder encoder() {
         return new Pbkdf2PasswordEncoder();
     }
@@ -135,7 +134,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 好的，然后配置指定用户详情服务和密码转码器即可，通过实现 **configure(AuthenticationManagerBuilder auth)** 的签名方法：
 
 ```java
-		@Override
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
             .passwordEncoder(encoder());
@@ -145,7 +144,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 接着是配置对应用户权限允许访问的页面和登录、登出后的跳转页面，通过实现 **configure(HttpSecurity http)** 的签名方法：
 
 ```java
-		@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
@@ -163,7 +162,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 可以看到 Spring Security 的 configure() 均适用**构造者（builder）**风格的接口来展现认证细节，首先是 **.authorizeRequests()** 指定用户权限对应的页面请求，这里需要注意顺序，越往后的配置优先级越低，比如这里配置的是拥有 “ROLE_USER” 权限的用户允许投票、查看投票结果，在接收到这两个页面的请求时如果用户未登录会自动跳转至登录页面；而除此之外的所有页面允许所有用户访问。
 
-**.and()** 表明两部分配置的过渡，**.formLogin()** 部分指定登录链接和登录成功后的跳转至投票页面（其中参数 true 表明强制要求用户登录后定向至该页面），**.logout()** 部分指定登出后跳转至主页。
+**and()** 表明两部分配置的过渡，**formLogin()** 部分指定登录链接和登录成功后的跳转至投票页面（其中参数 true 表明强制要求用户登录后定向至该页面），**logout()** 部分指定登出后跳转至主页。
 
 ## 自定义用户登录、注册
 
@@ -197,7 +196,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 </body>
 ```
 
-Spring 会自动识别页面中输入元素（input）名称（name）为 **username** 和 **password** 的元素，拦截 **“/login” ** 表单提交请求。
+Spring 会自动识别页面中输入元素（input）名称（name）为 **username** 和 **password** 的元素，拦截 **“/login”** 表单提交请求。
 
 接着声明控制器：
 
@@ -276,7 +275,7 @@ public class RegisterController {
             <label for="username">Username:</label>
             <input type="text" name="username" id="username">
 
-            <label for="password">Username:</label>
+            <label for="password">Password:</label>
             <input type="text" name="password" id="password">
 
             <input class="btn btn-primary" type="submit" value="注册">
@@ -288,7 +287,7 @@ public class RegisterController {
 </body>
 ```
 
-而 “/register” 的 “POST” 请求响应，即用户注册表单提交为数据库记录数据操作，密码使用之前定义的转码器，之后重定向至登录页面。
+而 “/register” 的 “POST” 请求响应，这里注意是通过引入一个创建的 **POJO** 来获取前端页面参数，前段 input 的 **name** 与对象的字段名一一对应并自动绑定，用户注册表单提交为数据库记录数据操作，密码使用之前定义的转码器，之后重定向至登录页面。
 
 ### 用户登出
 
@@ -306,6 +305,6 @@ Spring Security 会拦截对 **“/logout”** 的请求，用户点击按钮时
 
 到这里，这系列教程就结束了，我们得到了一个完整的基于 Spring Boot 的小型问卷调查系统，它有基本的投票、展示投票结果的功能，也支持用户认证、注册和登录。希望对你熟悉 Spring Boot 有所帮助。
 
-当然，这样的系统只是一个雏形，Spring Boot 的广袤自定义配置仅仅只展示了冰山一角，系统还可以新增很多功能，比如展示投票结果时可以过滤掉重复 ip 的无效票，在投票页面设计一个倒计时等等，可能有时间的话我会弄弄并把对应教程发到博客上吧（不会咕的，咕咕咕咕咕）。
+当然，这样的系统只是一个雏形，Spring Boot 的广袤自定义配置仅仅只展示了冰山一角，系统还可以新增很多功能，比如展示投票结果时可以过滤掉重复 ip 的无效票，在投票页面设计一个倒计时等等，可能有时间的话我会弄弄并把对应教程发到博客上吧。
 
 最后是该系列教程对应的 [Github 源码](https://github.com/medolia/QueVoteSys)。

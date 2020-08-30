@@ -1,11 +1,10 @@
 ---
-Title: Spring Boot 入门系列教程（一）
+title: Spring Boot 入门系列教程（一）
 categories: 编程
-tags:
-	- Spring Boot
-	- Spring JPA
-	- thymeleaf
-	- MYSQL
+tags: 
+  - Spring
+  - Spring JPA
+  - MYSQL
 excerpt: 从零开始搭建一个 Spring Boot 项目的教程（一）
 ---
 
@@ -13,7 +12,7 @@ excerpt: 从零开始搭建一个 Spring Boot 项目的教程（一）
 
 ## 介绍 <span id="1.1">
 
-试着做一个基于Spring的简单问卷调查系统！这是一个旨在帮助刚入门Spring框架的新手熟悉Spring Boot的运作方式，初步理解Spring MVC的工作原理的系列教程，教程很长，但我不会鸽。
+试着做一个基于 Spring 的简单问卷调查系统！这是一个旨在帮助刚入门 Spring 框架的新手熟悉 Spring Boot 的运作方式，初步理解 Spring MVC 的工作原理的系列教程，教程有点长，但我不会鸽。
 
 ## 环境要求 <span id="1.2">
 
@@ -54,7 +53,7 @@ excerpt: 从零开始搭建一个 Spring Boot 项目的教程（一）
 
   + {package name}
 
-    + Data - 数据库操作相关对象
+    + data - 数据库操作相关对象
     + model - 领域实体对象
     + security - 用户登录认证等配置对象
     + web - 各种控制网页跳转响应的控制器
@@ -82,7 +81,7 @@ excerpt: 从零开始搭建一个 Spring Boot 项目的教程（一）
 
 **问题表**
 
-``` mysql
+``` sql
 CREATE TABLE `question_info` 
 (
     `id`                   int(50)      NOT NULL, # 主键
@@ -94,7 +93,7 @@ CREATE TABLE `question_info`
 
 **选项表**
 
-```mysql
+```sql
 CREATE TABLE `option_info`
 (
     `id`             int(50)      NOT NULL,
@@ -106,7 +105,7 @@ CREATE TABLE `option_info`
 
 **答案表**
 
-```mysql
+```sql
 CREATE TABLE `answer_info`
 (
     `id`             int(50)      NOT NULL,
@@ -122,7 +121,7 @@ CREATE TABLE `answer_info`
 
 **用户表**
 
-```mysql
+```sql
 CREATE TABLE `user_info`
 (
     `id`          int(50)      NOT NULL,
@@ -200,14 +199,13 @@ public class Answer {
     private String answer_content;
     private String create_ip;
     private Date create_date;
-
-		// 预先定义日期为当前时间 
-    @PrePersist
+    
+    @PrePersist // 预先定义日期为当前时间 
     void createdAt() {
         this.create_date = new Date();
     }
 		
-  	// 自定义一个额外的构造器
+    // 自定义一个额外的构造器
     public Answer(int question_id, int option_id, String create_ip) {
         this.question_id = question_id;
         this.option_id = option_id;
@@ -248,7 +246,7 @@ public class User {
     private Date create_date;
     private String authority;
 		
-  	// 额外的构造器
+    // 额外的构造器
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -276,7 +274,7 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 }
 ```
 
-**CrudRepository** 提供了基本的CRUD（创建，读取，更新，删除）操作的方法，第一个参数指定持久化的领域实体，第二个参数是实体ID属性类型。神奇的是，Spring Data JPA 完全不用编写实现类，所有的十多个方法都是开箱即食！此外，我们还可以额外编写自定义 JPA 方法，比如这里定义的 **findByUsername **方法，Spring Data 会自动解析是要获取（find）一个（返回类型为 User）以（By）用户名（Username）为特征的实体。
+**CrudRepository** 提供了基本的CRUD（创建，读取，更新，删除）操作的方法，第一个参数指定持久化的领域实体，第二个参数是实体ID属性类型。神奇的是，Spring Data JPA 完全不用编写实现类，所有的十多个方法都是开箱即食！此外，我们还可以额外编写自定义 JPA 方法，比如这里定义的 **findByUsername** 方法，Spring Data 会自动解析是要获取（find）一个（返回类型为 User）以（By）用户名（Username）为特征的实体。
 
 其他 repository 声明类似，这里不多说。
 
