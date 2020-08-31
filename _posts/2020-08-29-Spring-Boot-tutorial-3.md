@@ -7,7 +7,7 @@ tags:
   - Spring Security
   - Spring JPA
   - thymeleaf
-excerpt: 从零开始搭建一个 Spring Boot 项目的教程（三）
+excerpt: 使用 Spring Security 配置用户认证服务
 ---
 
 # 介绍

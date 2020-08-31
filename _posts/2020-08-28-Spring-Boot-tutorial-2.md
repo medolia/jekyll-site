@@ -8,7 +8,7 @@ tags:
   - Spring MVC
   - thymeleaf
   - jQuery
-excerpt: 从零开始搭建一个 Spring Boot 项目的教程（二）
+excerpt: 实现展现投票页面、处理提交的投票表单和展示投票结果功能
 ---
 
 # 前言

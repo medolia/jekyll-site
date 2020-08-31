@@ -4,20 +4,6 @@ categories: 编程
 tags: markdown
 excerpt: 简要 markdown 语法
 ---
----------
-
-# 目录 <span id="home">
-
-* **[Markdown简明语法](#1)**
-	* **[Markdown及扩展](#1.1)**
-		* **[表格](#1.1.1)**
-		* **[插入图片](#1.1.2)**
-		* **[定义列表](#1.1.3)**
-		* **[代码块](#1.1.4)**
-		* **[脚注](#1.1.5)**
-		* **[数学公式](#1.1.6)**
-	* **[浏览器兼容](#1.2)**
-	* **[常用Markdown编辑器推荐](#1.3)**
 
 ---------
 
@@ -151,10 +137,6 @@ $$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 4. **Harropad**: [官网](http://pad.haroopress.com/user.html)
 
 5. **Retext**: 简单强大的文本编辑器，可控制输出格式：pdf, html等，仅支持Linux（推荐）.[下载](https://github.com/retext-project/retext)
-
-------
-
-# **返回[顶部](#home)**
 
 ---------
 

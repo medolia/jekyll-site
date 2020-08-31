@@ -5,7 +5,8 @@ tags:
   - Spring
   - Spring JPA
   - MYSQL
-excerpt: 从零开始搭建一个 Spring Boot 项目的教程（一）
+excerpt: 初步确定一个调查问卷系统的数据库结构，创建对应的领域对象和数据库交互操作对象
+
 ---
 
 # 前言 <span id="1">
