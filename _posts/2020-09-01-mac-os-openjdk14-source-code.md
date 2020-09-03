@@ -42,7 +42,7 @@ brew install ccache freetype autoconf
 
 **常见报错**
 
-```sh
+```
 xcode-select: error: tool 'xcodebuild' requires Xcode,
 but active developer directory
 '/Library/Developer/CommandLineTools' is a command line tools instance
@@ -70,7 +70,7 @@ but active developer directory
 + `--with-memory-size=8000`: 使用 8GB 内存
 + `--disable-warnings-as-errors`: 忽略警告，减少报错
 
-```sh
+```
 % bash configure --with-debug-level=slowdebug --with-jvm-variants=server --with-target-bits=64 --enable-ccache --with-num-cores=6 --with-memory-size=8000 --disable-warnings-as-errors      
 ```
 
