@@ -1,9 +1,10 @@
 ---
 title: Github Pages 搭建个人博客网站
-categories: 编程
+categories: 网站维护
 tags: 
   - Jekyll
   - markdown
+  - Github Pages
 excerpt: 简明教程，搭建一个基于 Jekyll 和 Github Pages 的个人博客网站
 ---
 
