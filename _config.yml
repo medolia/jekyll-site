@@ -25,10 +25,10 @@ url                      : "https://medolia.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "medolia/medolia.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : "http://qg2psmgfh.hn-bkt.clouddn.com/2020-09-03-081307.png"
+logo                     : "https://ftp.bmp.ovh/imgs/2020/09/9e852aa7ad175cd0.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 80
+words_per_minute         : 65
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
@@ -94,7 +94,7 @@ analytics:
 # Site Author
 author:
   name             : "Medolia"
-  avatar           : "http://qg2psmgfh.hn-bkt.clouddn.com/2020-09-03-081302.png"
+  avatar           : "https://ftp.bmp.ovh/imgs/2020/09/f00ee0b4c3644ac8.png"
   bio              : "总是容易被稀奇古怪的东西吸引"
   location         : "China, ShangHai"
   email            :
